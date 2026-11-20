@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<link rel="manifest" href="./manifest.json">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101b33">
+<title>BL Digital — Gestão de Produtos</title>
+<style>
+:root{--navy:#101b33;--navy2:#172744;--blue:#3678f6;--blue2:#eaf1ff;--bg:#f3f6fb;--card:#fff;--ink:#172033;--muted:#718096;--line:#e4eaf2;--green:#159b72;--red:#d94b58;--amber:#d18b21;--shadow:0 8px 28px #162b4a12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;min-height:100vh;padding-bottom:84px}.top{background:linear-gradient(130deg,var(--navy),#203d69);color:#fff;padding:20px 18px 16px;border-radius:0 0 24px 24px}.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:21px;font-weight:850;letter-spacing:.2px}.brand small{display:block;font-size:11px;opacity:.72;font-weight:500;letter-spacing:1.2px}.status{font-size:11px;border:1px solid #ffffff42;padding:6px 9px;border-radius:30px;white-space:nowrap}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.metric{background:#ffffff12;border:1px solid #ffffff20;border-radius:14px;padding:10px}.metric b{display:block;font-size:20px}.metric span{font-size:11px;opacity:.75}.main{padding:16px}.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;background:#e7edf6;padding:5px;border-radius:15px;margin-bottom:15px;position:sticky;top:0;z-index:5}.tab{border:0;background:transparent;border-radius:11px;padding:10px 3px;color:#5e6d84;font-size:12px;font-weight:750}.tab.active{background:white;color:var(--blue);box-shadow:0 2px 8px #17274412}.tab span{display:block;font-size:18px;margin-bottom:2px}.panel{display:none}.panel.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:13px;box-shadow:var(--shadow)}.section-title{font-size:16px;font-weight:850;margin:0 0 4px}.sub{font-size:12px;color:var(--muted);margin:0 0 12px}.field{display:flex;flex-direction:column;gap:5px;margin:9px 0}.field label{font-size:12px;font-weight:750;color:#56647a}.field input,.field textarea,.field select,.searchbox{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fbfcfe;color:var(--ink);outline:none}.field input:focus,.field textarea:focus,.searchbox:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3678f61c}.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:800;font-size:13px;background:var(--blue);color:white}.btn.secondary{background:var(--blue2);color:#2459ba}.btn.dark{background:var(--navy2);color:#fff}.btn.ghost{background:#f1f4f8;color:#526177}.btn.danger{background:#fff0f1;color:var(--red)}.btn.small{padding:7px 10px;font-size:12px}.btn:disabled{opacity:.45;cursor:not-allowed}.searchline{display:flex;gap:8px}.searchline .searchbox{flex:1;min-width:0}.filter-wrap{display:flex;gap:7px;overflow-x:auto;padding:3px 1px 10px;scrollbar-width:thin}.pill{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:#58677d;border-radius:30px;padding:7px 11px;font-size:11px;font-weight:800}.pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}.result-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);padding:3px 1px 9px}.products{display:grid;gap:9px}.product{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}.pname{font-weight:800;font-size:14px;overflow-wrap:anywhere}.pmeta{font-size:11px;color:var(--muted);margin-top:4px}.code{font-variant-numeric:tabular-nums;color:#285db7;font-weight:850;font-size:12px}.actions{display:flex;gap:5px}.empty{text-align:center;padding:28px 12px;color:var(--muted);font-size:13px}.empty b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}.notice{border-radius:12px;padding:10px 12px;font-size:12px;background:#edf5ff;color:#315c9d;margin:10px 0}.notice.warn{background:#fff7e8;color:#875d16}.notice.good{background:#eaf8f2;color:#167450}.hidden{display:none!important}.history-item{border:1px solid var(--line);border-radius:13px;padding:12px;margin:8px 0;background:#fff}.history-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.history-name{font-weight:850}.history-meta{font-size:11px;color:var(--muted);margin-top:3px}.calc{background:#101b33;color:#fff;border-radius:18px;padding:16px}.calc-screen{text-align:right;min-height:64px;display:flex;flex-direction:column;justify-content:end;overflow-wrap:anywhere}.calc-expr{font-size:13px;color:#a8b9d3}.calc-result{font-size:30px;font-weight:850}.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.calc-grid button{border:0;border-radius:12px;padding:15px 4px;background:#263a5a;color:white;font-weight:800}.calc-grid button.op{background:#355a91}.calc-grid button.eq{background:#2c9b77}.calc-grid button.clear{background:#75424b}.scanner{background:#111b2d;border-radius:15px;padding:12px;color:#fff;text-align:center}.scanner video{width:100%;max-height:260px;object-fit:cover;border-radius:10px;background:#050a12}.footer{padding:12px 16px;text-align:center;color:#8390a3;font-size:10px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#101b33;color:#fff;padding:11px 16px;border-radius:30px;box-shadow:var(--shadow);z-index:30;font-size:12px;max-width:90%;text-align:center}.modal-bg{position:fixed;inset:0;background:#09132699;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal-bg.open{display:flex}.modal{background:#fff;border-radius:18px;padding:18px;width:min(520px,100%);max-height:90vh;overflow:auto}.modal h3{margin:0 0 12px}.storage-detail{font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+@media(min-width:700px){.main{padding:22px}.products{grid-template-columns:repeat(2,minmax(0,1fr))}.top{padding:24px 26px}.product{min-height:88px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="toprow"><div class="brand">BL DIGITAL <small>GESTÃO • CONSULTA • OFFLINE</small></div><div class="status" id="storageBadge">◌ Preparando banco local…</div></div>
+ <div class="summary"><div class="metric"><b id="metricProducts">0</b><span>Produtos ativos</span></div><div class="metric"><b id="metricBrands">0</b><span>Marcas detectadas</span></div><div class="metric"><b id="metricLists">1</b><span>Listas no histórico</span></div></div>
+</header>
+<main class="main">
+<nav class="tabs">
+ <button class="tab active" data-tab="search"><span>⌕</span>Buscar</button>
+ <button class="tab" data-tab="guide"><span>▤</span>Produtos</button>
+ <button class="tab" data-tab="manage"><span>＋</span>Atualizar</button>
+ <button class="tab" data-tab="history"><span>◷</span>Histórico</button>
+ <button class="tab" data-tab="calc"><span>＋</span>Calc</button>
+</nav>
+<section class="panel active" id="panel-search">
+ <div class="card"><h2 class="section-title">Encontrar produto</h2><p class="sub">Pesquise pelo código ou pelo nome. A busca funciona sem internet.</p>
+  <div class="searchline"><input class="searchbox" id="searchInput" placeholder="Digite código ou nome…" autocomplete="off"><button class="btn secondary" id="clearSearch">Limpar</button></div>
+  <div class="sub" style="margin:12px 0 5px">FILTRAR SOMENTE POR MARCA</div><div class="filter-wrap" id="searchFilters"></div><div class="notice" id="breadListShortcut">O catálogo começa vazio. A Lista do Pão está guardada no histórico e possui filtros próprios. <button class="btn secondary small" id="openBreadList" style="margin-top:7px">Abrir Lista do Pão</button></div>
+ </div>
+ <div class="result-head"><span id="searchCount">Catálogo vazio</span><span id="searchBrandActive">Todas as marcas</span></div><div class="products" id="searchResults"></div>
+ <div class="card"><h3 class="section-title">Leitor de código</h3><p class="sub">Use a câmera quando o navegador permitir ou selecione uma foto do código.</p>
+  <div class="row"><button class="btn" id="openCamera">Abrir câmera</button><label class="btn secondary" style="text-align:center">Ler foto<input id="photoInput" type="file" accept="image/*" capture="environment" hidden></label></div>
+  <div class="scanner hidden" id="scannerBox"><video id="cameraVideo" playsinline muted></video><div class="sub" id="cameraStatus" style="color:#c5d4ea;margin:8px 0">Aponte para o código de barras</div><button class="btn danger small" id="closeCamera">Fechar câmera</button></div>
+  <div class="field"><label>Ou digite o código manualmente</label><div class="row"><input id="manualCode" placeholder="Código de barras"><button class="btn secondary" id="searchCode">Buscar</button></div></div>
+ </div>
+</section>
+<section class="panel" id="panel-guide">
+ <div class="card"><h2 class="section-title">Catálogo de produtos</h2><p class="sub">A lista ativa é independente do histórico. Os filtros exibem somente marcas reconhecidas ou confirmadas.</p><div class="sub" style="margin:10px 0 4px">FILTRAR SOMENTE POR MARCA</div><div class="filter-wrap" id="guideFilters"></div><div class="result-head"><span id="guideCount">0 produtos</span><button class="btn small secondary" id="saveCurrentList">Salvar lista no histórico</button></div><div class="products" id="guideResults"></div></div>
+</section>
+<section class="panel" id="panel-manage">
+ <div class="card"><h2 class="section-title">Cadastrar produto</h2><p class="sub">O código é mantido exatamente como digitado, inclusive zeros à esquerda.</p>
+  <div class="field"><label>Código</label><input id="productCode" inputmode="numeric" placeholder="Ex.: 0789123456789"></div>
+  <div class="field"><label>Nome do produto</label><input id="productName" placeholder="Nome do produto"></div>
+  <div class="field"><label>Embalagem / medida</label><input id="productMeasure" placeholder="Ex.: CXA 1 X 12 X 500G"></div>
+  <div class="field"><label>Marca (opcional)</label><input id="productBrand" placeholder="Detectada automaticamente pelo nome, se reconhecida"></div>
+  <button class="btn" id="saveProduct" style="width:100%">Salvar produto</button>
+ </div>
+ <div class="card"><h2 class="section-title">Marcas para confirmar</h2><p class="sub">Palavras desconhecidas não viram filtros automaticamente. Confirme apenas quando forem marcas.</p><div id="brandReviewList"></div></div>
+ <div class="card"><h2 class="section-title">Importar vários produtos</h2><p class="sub">Cole uma linha por produto: código | nome | medida. Também aceita JSON.</p><div class="field"><textarea id="bulkText" rows="5" placeholder="789123 | PÃO DE FORMA PANCO | PCT 1 X 500G"></textarea></div><div class="row"><button class="btn" id="importText">Importar lista</button><label class="btn secondary" style="text-align:center">Abrir JSON<input id="jsonInput" type="file" accept=".json,application/json" hidden></label></div>
+ </div>
+ <div class="card"><h2 class="section-title">Backup e segurança</h2><p class="sub">Exporte uma cópia dos seus dados para guardar fora do navegador.</p><div class="row"><button class="btn secondary" id="exportBackup">Exportar backup</button><button class="btn ghost" id="checkStorage">Verificar armazenamento</button></div><div id="storageInfo" class="storage-detail" style="margin-top:10px"></div></div>
+</section>
+<section class="panel" id="panel-history">
+ <div class="card"><h2 class="section-title">Histórico de listas</h2><p class="sub">Listas guardadas separadamente do catálogo ativo. Abra uma lista para consultar ou restaurar.</p><div id="historyList"></div><div id="historyViewer" class="hidden"><div class="row" style="align-items:center;margin:12px 0"><button class="btn ghost small" id="closeHistoryViewer">← Voltar</button><b id="historyViewerTitle"></b></div><div class="sub">FILTRAR SOMENTE POR MARCA</div><div class="filter-wrap" id="historyFilters"></div><div class="result-head" id="historyViewerCount"></div><div class="products" id="historyViewerProducts"></div></div></div>
+</section>
+<section class="panel" id="panel-calc">
+ <div class="card"><h2 class="section-title">Calculadora</h2><p class="sub">Cálculos rápidos sem sair do aplicativo.</p><div class="calc"><div class="calc-screen"><div class="calc-expr" id="calcExpr"></div><div class="calc-result" id="calcResult">0</div></div><div class="calc-grid" id="calcKeys"></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><b>Últimos cálculos</b><button class="btn ghost small" id="clearCalcHistory">Limpar histórico</button></div><div id="calcHistory" class="storage-detail" style="margin-top:8px"></div></div>
+</section>
+</main><div class="footer">BL Digital • Aplicativo local • Seus dados ficam neste navegador. Faça backups regularmente.</div>
+</div>
+<div class="modal-bg" id="editModal"><div class="modal"><h3>Editar produto</h3><input id="editOriginalCode" type="hidden"><div class="field"><label>Código</label><input id="editCode"></div><div class="field"><label>Nome</label><input id="editName"></div><div class="field"><label>Embalagem / medida</label><input id="editMeasure"></div><div class="field"><label>Marca</label><input id="editBrand"></div><div class="row"><button class="btn ghost" id="cancelEdit">Cancelar</button><button class="btn" id="confirmEdit">Salvar alterações</button></div></div></div>
+<div class="toast hidden" id="toast"></div>
+<script>
+/* === ZXing Multi-Format Barcode Library (100% Offline Embedded v2 - Multi-Angle + Denoise) === */
+(function(global) {
+    'use strict';
+
+    const BarcodeFormat = {
+        EAN_13: 'EAN_13',
+        EAN_8: 'EAN_8',
+        UPC_A: 'UPC_A',
+        CODE_128: 'CODE_128',
+        CODE_39: 'CODE_39',
+        ITF: 'ITF'
+    };
+
+    class Result {
+        constructor(text, format) {
+            this.text = text;
+            this.format = format;
+        }
+        getText() { return this.text; }
+        getBarcodeFormat() { return this.format; }
+    }
+
+    class NotFoundException extends Error {
+        constructor(msg = 'Código de barras não encontrado') {
+            super(msg);
+            this.name = 'NotFoundException';
+        }
+    }
+
+    // Tabelas oficiais GS1 EAN-13 / UPC-A / EAN-8
+    const L_PATTERNS = [
+        [3,2,1,1], [2,2,2,1], [2,1,2,2], [1,4,1,1], [1,1,3,2],
+        [1,2,3,1], [1,1,1,4], [1,3,1,2], [1,2,1,3], [3,1,1,2]
+    ];
+    const G_PATTERNS = [
+        [1,1,2,3], [1,2,2,2], [2,2,1,2], [1,1,4,1], [2,3,1,1],
+        [1,3,2,1], [4,1,1,1], [2,1,3,1], [3,1,2,1], [2,1,1,3]
+    ];
+    const R_PATTERNS = L_PATTERNS;
+    const FIRST_DIGIT_PARITY = [
+        'LLLLLL', 'LLGLGG', 'LLGGLG', 'LLGGGL', 'LGLLGG',
+        'LGGLLG', 'LGGGLL', 'LGLGLG', 'LGLGGL', 'LGGLGL'
+    ];
+
+    // Tabela oficial Code 128 (valores 0..105 + Stop 106)
+    const CODE128_PATTERNS = [
+        [2,1,2,2,2,2],[2,2,2,1,2,2],[2,2,2,2,2,1],[1,2,1,2,2,3],[1,2,1,3,2,2],
+        [1,3,1,2,2,2],[1,2,2,2,1,3],[1,2,2,3,1,2],[1,3,2,2,1,2],[2,2,1,2,1,3],
+        [2,2,1,3,1,2],[2,3,1,2,1,2],[1,1,2,2,3,2],[1,2,2,1,3,2],[1,2,2,2,3,1],
+        [1,1,3,2,2,2],[1,2,3,1,2,2],[1,2,3,2,2,1],[2,2,3,2,1,1],[2,2,1,1,3,2],
+        [2,2,1,2,3,1],[2,1,3,2,1,2],[2,2,3,1,1,2],[3,1,2,1,3,1],[3,1,1,2,2,2],
+        [3,2,1,1,2,2],[3,2,1,2,2,1],[3,1,2,2,1,2],[3,2,2,1,1,2],[3,2,2,2,1,1],
+        [2,1,2,1,2,3],[2,1,2,3,2,1],[2,3,2,1,2,1],[1,1,1,3,2,3],[1,3,1,1,2,3],
+        [1,3,1,3,2,1],[1,1,2,3,1,3],[1,3,2,1,1,3],[1,3,2,3,1,1],[2,1,1,3,1,3],
+        [2,3,1,1,1,3],[2,3,1,3,1,1],[1,1,2,1,3,3],[1,1,2,3,3,1],[1,3,2,1,3,1],
+        [1,1,3,1,2,3],[1,1,3,3,2,1],[1,3,3,1,2,1],[3,1,3,1,2,1],[2,1,1,3,3,1],
+        [2,3,1,1,3,1],[2,1,3,1,1,3],[2,1,3,3,1,1],[2,1,3,1,3,1],[3,1,1,1,2,3],
+        [3,1,1,3,2,1],[3,3,1,1,2,1],[3,1,2,1,1,3],[3,1,2,3,1,1],[3,3,2,1,1,1],
+        [3,1,4,1,1,1],[2,2,1,4,1,1],[4,3,1,1,1,1],[1,1,1,2,2,4],[1,1,1,4,2,2],
+        [1,2,1,1,2,4],[1,2,1,4,2,1],[1,4,1,1,2,2],[1,4,1,2,2,1],[1,1,2,2,1,4],
+        [1,1,2,4,1,2],[1,2,2,1,1,4],[1,2,2,4,1,1],[1,4,2,1,1,2],[1,4,2,2,1,1],
+        [2,4,1,2,1,1],[2,2,1,1,1,4],[4,1,3,1,1,1],[2,4,1,1,1,2],[1,3,4,1,1,1],
+        [1,1,1,2,4,2],[1,2,1,1,4,2],[1,2,1,2,4,1],[1,1,4,2,1,2],[1,2,4,1,1,2],
+        [1,2,4,2,1,1],[4,1,1,2,1,2],[4,2,1,1,1,2],[4,2,1,2,1,1],[2,1,2,1,4,1],
+        [2,1,4,1,2,1],[4,1,2,1,2,1],[1,1,1,1,4,3],[1,1,1,3,4,1],[1,3,1,1,4,1],
+        [1,1,4,1,1,3],[1,1,4,3,1,1],[4,1,1,1,1,3],[4,1,1,3,1,1],[1,1,3,1,4,1],
+        [1,1,4,1,3,1],[3,1,1,1,4,1],[4,1,1,1,3,1],[2,1,1,4,1,2],[2,1,1,2,1,4],
+        [2,1,1,2,3,2]
+    ];
+    const CODE128_STOP = [2,3,3,1,1,1,2];
+
+    // Tabela oficial ITF / Interleaved 2 of 5
+    const ITF_PATTERNS = [
+        [0,0,1,1,0], [1,0,0,0,1], [0,1,0,0,1], [1,1,0,0,0], [0,0,1,0,1],
+        [1,0,1,0,0], [0,1,1,0,0], [0,0,0,1,1], [1,0,0,1,0], [0,1,0,1,0]
+    ];
+
+    // Tabela oficial Code 39
+    const CODE39_MAP = {
+        '111221211':'0','211211112':'1','112211112':'2','212211111':'3','111221112':'4',
+        '211221111':'5','112221111':'6','111211212':'7','211211211':'8','112211211':'9',
+        '211112112':'A','112112112':'B','212112111':'C','111122112':'D','211122111':'E',
+        '112122111':'F','111112212':'G','211112211':'H','112112211':'I','111122211':'J',
+        '211111122':'K','112111122':'L','212111121':'M','111121122':'N','211121121':'O',
+        '112121121':'P','111111222':'Q','211111221':'R','112111221':'S','111121221':'T',
+        '221111112':'U','122111112':'V','222111111':'W','121121112':'X','221121111':'Y',
+        '122121111':'Z','121111212':'-','221111211':'.','122111211':' ','121212111':'$',
+        '121211121':'/','121112121':'+','111212121':'%','121121211':'*'
+    };
+
+    function verifyMod10(digits) {
+        let sum = 0;
+        const len = digits.length;
+        for (let i = 0; i < len - 1; i++) {
+            const d = digits.charCodeAt(len - 2 - i) - 48;
+            if (d < 0 || d > 9) return false;
+            sum += d * (i % 2 === 0 ? 3 : 1);
+        }
+        const check = (10 - (sum % 10)) % 10;
+        return check === (digits.charCodeAt(len - 1) - 48);
+    }
+
+    function matchPattern(runs, offset, pattern, totalModules, maxIndividualErr = 0.62, maxTotalErr = 1.6) {
+        let sumRuns = 0;
+        for (let i = 0; i < pattern.length; i++) sumRuns += runs[offset + i];
+        if (sumRuns <= 0) return Infinity;
+        const unit = sumRuns / totalModules;
+        let totalErr = 0;
+        for (let i = 0; i < pattern.length; i++) {
+            const expected = pattern[i] * unit;
+            const err = Math.abs(runs[offset + i] - expected) / unit;
+            if (err > maxIndividualErr) return Infinity;
+            totalErr += err;
+        }
+        return totalErr <= maxTotalErr ? totalErr : Infinity;
+    }
+
+    function decodeEanDigit(runs, offset, patterns) {
+        let bestDigit = -1;
+        let bestErr = Infinity;
+        for (let d = 0; d < 10; d++) {
+            const err = matchPattern(runs, offset, patterns[d], 7, 0.65, 1.7);
+            if (err < bestErr) {
+                bestErr = err;
+                bestDigit = d;
+            }
+        }
+        return { digit: bestDigit, err: bestErr };
+    }
+
+    function decodeEAN(runs, isBarStart) {
+        for (let i = isBarStart ? 0 : 1; i + 58 < runs.length; i += 2) {
+            if (matchPattern(runs, i, [1, 1, 1], 3, 0.7, 1.5) === Infinity) continue;
+
+            // EAN-13 (3 + 24 + 5 + 24 + 3 = 59 runs)
+            if (i + 59 <= runs.length) {
+                const centerOff = i + 27;
+                const endOff = i + 56;
+                if (matchPattern(runs, centerOff, [1, 1, 1, 1, 1], 5, 0.7, 2.2) !== Infinity &&
+                    matchPattern(runs, endOff, [1, 1, 1], 3, 0.7, 1.6) !== Infinity) {
+
+                    let parityStr = '';
+                    let digits = '';
+                    let valid = true;
+
+                    for (let d = 0; d < 6; d++) {
+                        const off = i + 3 + d * 4;
+                        const resL = decodeEanDigit(runs, off, L_PATTERNS);
+                        const resG = decodeEanDigit(runs, off, G_PATTERNS);
+                        if (resL.digit === -1 && resG.digit === -1) { valid = false; break; }
+                        if (resL.err <= resG.err) {
+                            parityStr += 'L';
+                            digits += resL.digit;
+                        } else {
+                            parityStr += 'G';
+                            digits += resG.digit;
+                        }
+                    }
+
+                    if (valid) {
+                        const firstDigit = FIRST_DIGIT_PARITY.indexOf(parityStr);
+                        if (firstDigit !== -1) {
+                            digits = String(firstDigit) + digits;
+                            for (let d = 0; d < 6; d++) {
+                                const off = centerOff + 5 + d * 4;
+                                const resR = decodeEanDigit(runs, off, R_PATTERNS);
+                                if (resR.digit === -1) { valid = false; break; }
+                                digits += resR.digit;
+                            }
+                            if (valid && verifyMod10(digits)) {
+                                if (digits.startsWith('0')) {
+                                    return new Result(digits.slice(1), BarcodeFormat.UPC_A);
+                                }
+                                return new Result(digits, BarcodeFormat.EAN_13);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // EAN-8 (3 + 16 + 5 + 16 + 3 = 43 runs)
+            if (i + 43 <= runs.length) {
+                const centerOff = i + 19;
+                const endOff = i + 40;
+                if (matchPattern(runs, centerOff, [1, 1, 1, 1, 1], 5, 0.7, 2.2) !== Infinity &&
+                    matchPattern(runs, endOff, [1, 1, 1], 3, 0.7, 1.6) !== Infinity) {
+
+                    let digits = '';
+                    let valid = true;
+                    for (let d = 0; d < 4; d++) {
+                        const resL = decodeEanDigit(runs, i + 3 + d * 4, L_PATTERNS);
+                        if (resL.digit === -1) { valid = false; break; }
+                        digits += resL.digit;
+                    }
+                    if (valid) {
+                        for (let d = 0; d < 4; d++) {
+                            const resR = decodeEanDigit(runs, centerOff + 5 + d * 4, R_PATTERNS);
+                            if (resR.digit === -1) { valid = false; break; }
+                            digits += resR.digit;
+                        }
+                        if (valid && verifyMod10(digits)) {
+                            return new Result(digits, BarcodeFormat.EAN_8);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    function decodeCode128Symbol(runs, offset) {
+        let bestCode = -1;
+        let bestErr = Infinity;
+        for (let c = 0; c < CODE128_PATTERNS.length; c++) {
+            const err = matchPattern(runs, offset, CODE128_PATTERNS[c], 11, 0.65, 1.8);
+            if (err < bestErr) {
+                bestErr = err;
+                bestCode = c;
+            }
+        }
+        return bestCode;
+    }
+
+    function decodeCode128(runs, isBarStart) {
+        for (let i = isBarStart ? 0 : 1; i + 19 <= runs.length; i += 2) {
+            const startCode = decodeCode128Symbol(runs, i);
+            if (startCode !== 103 && startCode !== 104 && startCode !== 105) continue;
+
+            let codeSet = startCode === 103 ? 'A' : (startCode === 104 ? 'B' : 'C');
+            let checksum = startCode;
+            let multiplier = 1;
+            const codes = [];
+            let pos = i + 6;
+            let foundStop = false;
+
+            while (pos + 7 <= runs.length) {
+                if (matchPattern(runs, pos, CODE128_STOP, 13, 0.68, 2.2) !== Infinity) {
+                    foundStop = true;
+                    break;
+                }
+                if (pos + 6 > runs.length) break;
+                const sym = decodeCode128Symbol(runs, pos);
+                if (sym === -1) break;
+                codes.push(sym);
+                pos += 6;
+                if (codes.length > 60) break;
+            }
+
+            if (!foundStop || codes.length < 2) continue;
+            const expectedCheck = codes.pop();
+            for (let k = 0; k < codes.length; k++) {
+                checksum += codes[k] * multiplier;
+                multiplier++;
+            }
+            if ((checksum % 103) !== expectedCheck) continue;
+
+            let text = '';
+            let shiftNext = false;
+            for (let k = 0; k < codes.length; k++) {
+                const c = codes[k];
+                const activeSet = shiftNext ? (codeSet === 'A' ? 'B' : 'A') : codeSet;
+                shiftNext = false;
+
+                if (activeSet === 'C') {
+                    if (c >= 0 && c <= 99) text += (c < 10 ? '0' + c : String(c));
+                    else if (c === 100) codeSet = 'B';
+                    else if (c === 101) codeSet = 'A';
+                } else if (activeSet === 'B') {
+                    if (c >= 0 && c <= 95) text += String.fromCharCode(c + 32);
+                    else if (c === 98) shiftNext = true;
+                    else if (c === 99) codeSet = 'C';
+                    else if (c === 101) codeSet = 'A';
+                } else if (activeSet === 'A') {
+                    if (c >= 0 && c <= 63) text += String.fromCharCode(c + 32);
+                    else if (c >= 64 && c <= 95) text += String.fromCharCode(c - 64);
+                    else if (c === 98) shiftNext = true;
+                    else if (c === 99) codeSet = 'C';
+                    else if (c === 100) codeSet = 'B';
+                }
+            }
+            if (text.length > 0) {
+                return new Result(text, BarcodeFormat.CODE_128);
+            }
+        }
+        return null;
+    }
+
+    function decodeITF(runs, isBarStart) {
+        for (let i = isBarStart ? 0 : 1; i + 37 <= runs.length; i += 2) {
+            if (matchPattern(runs, i, [1, 1, 1, 1], 4, 0.65, 1.5) === Infinity) continue;
+            const unit = (runs[i] + runs[i+1] + runs[i+2] + runs[i+3]) / 4;
+            const threshold = unit * 1.65;
+            let pos = i + 4;
+            let digits = '';
+
+            while (pos + 10 <= runs.length) {
+                if (runs[pos] > threshold && runs[pos+1] <= threshold && runs[pos+2] <= threshold) {
+                    if (digits.length === 14 && verifyMod10(digits)) {
+                        return new Result(digits, BarcodeFormat.ITF);
+                    }
+                    break;
+                }
+                const barBits = [];
+                const spaceBits = [];
+                for (let b = 0; b < 5; b++) {
+                    barBits.push(runs[pos + b * 2] > threshold ? 1 : 0);
+                    spaceBits.push(runs[pos + b * 2 + 1] > threshold ? 1 : 0);
+                }
+                const d1 = ITF_PATTERNS.findIndex(p => p.every((v, idx) => v === barBits[idx]));
+                const d2 = ITF_PATTERNS.findIndex(p => p.every((v, idx) => v === spaceBits[idx]));
+                if (d1 === -1 || d2 === -1) break;
+                digits += String(d1) + String(d2);
+                pos += 10;
+                if (digits.length > 20) break;
+            }
+        }
+        return null;
+    }
+
+    function decodeCode39(runs, isBarStart) {
+        for (let i = isBarStart ? 0 : 1; i + 29 <= runs.length; i += 2) {
+            let pos = i;
+            let text = '';
+            let started = false;
+            while (pos + 9 <= runs.length) {
+                let sum = 0;
+                for (let k = 0; k < 9; k++) sum += runs[pos + k];
+                const threshold = (sum / 12) * 1.5;
+                let pattern = '';
+                let wideCount = 0;
+                for (let k = 0; k < 9; k++) {
+                    if (runs[pos + k] > threshold) {
+                        pattern += '2';
+                        wideCount++;
+                    } else {
+                        pattern += '1';
+                    }
+                }
+                if (wideCount !== 3) break;
+                const ch = CODE39_MAP[pattern];
+                if (!ch) break;
+                if (!started) {
+                    if (ch !== '*') break;
+                    started = true;
+                } else {
+                    if (ch === '*') {
+                        if (text.length >= 3) return new Result(text, BarcodeFormat.CODE_39);
+                        break;
+                    }
+                    text += ch;
+                }
+                pos += 10;
+            }
+        }
+        return null;
+    }
+
+    function smoothScanline(lum) {
+        const n = lum.length;
+        if (n < 3) return lum;
+        const out = new Float32Array(n);
+        out[0] = lum[0];
+        out[n - 1] = lum[n - 1];
+        for (let i = 1; i < n - 1; i++) {
+            out[i] = 0.25 * lum[i - 1] + 0.5 * lum[i] + 0.25 * lum[i + 1];
+        }
+        return out;
+    }
+
+    function extractRunsAdaptive(lum, k, winDiv = 14) {
+        const n = lum.length;
+        const win = Math.max(12, Math.floor(n / winDiv));
+        const prefix = new Float64Array(n + 1);
+        for (let i = 0; i < n; i++) prefix[i + 1] = prefix[i] + lum[i];
+
+        const runs = [];
+        let curBit = -1;
+        let curLen = 0;
+        let firstIsBar = false;
+
+        for (let i = 0; i < n; i++) {
+            const a = Math.max(0, i - win);
+            const b = Math.min(n, i + win + 1);
+            const mean = (prefix[b] - prefix[a]) / (b - a);
+            const bit = lum[i] < (mean - k) ? 1 : 0;
+            if (curBit === -1) {
+                curBit = bit;
+                firstIsBar = (bit === 1);
+                curLen = 1;
+            } else if (bit === curBit) {
+                curLen++;
+            } else {
+                runs.push(curLen);
+                curBit = bit;
+                curLen = 1;
+            }
+        }
+        if (curLen > 0) runs.push(curLen);
+        return { runs, firstIsBar };
+    }
+
+    function tryDecodeRuns(runs, firstIsBar) {
+        if (runs.length < 25) return null;
+        const dirs = [
+            { r: runs, bar: firstIsBar },
+            { r: runs.slice().reverse(), bar: (runs.length % 2 === 1) ? firstIsBar : !firstIsBar }
+        ];
+        for (let d = 0; d < dirs.length; d++) {
+            const { r, bar } = dirs[d];
+            const res = decodeEAN(r, bar) ||
+                        decodeCode128(r, bar) ||
+                        decodeITF(r, bar) ||
+                        decodeCode39(r, bar);
+            if (res) return res;
+        }
+        return null;
+    }
+
+    function decodeScanline(rawLum) {
+        const smoothed = smoothScanline(rawLum);
+        const configs = [
+            { k: 3, w: 14 },
+            { k: 8, w: 14 },
+            { k: 15, w: 14 },
+            { k: 6, w: 22 },
+            { k: 18, w: 10 }
+        ];
+        for (let c = 0; c < configs.length; c++) {
+            const { k, w } = configs[c];
+            const { runs, firstIsBar } = extractRunsAdaptive(smoothed, k, w);
+            const res = tryDecodeRuns(runs, firstIsBar);
+            if (res) return res;
+        }
+        return null;
+    }
+
+    function scanImageData(imgData, numLines = 36) {
+        const { width, height, data } = imgData;
+        if (!width || !height) return null;
+
+        // 1. Varredura horizontal (0° / 180°)
+        const rowLum = new Float32Array(width);
+        for (let s = 1; s <= numLines; s++) {
+            const y = Math.floor((height * s) / (numLines + 1));
+            const rowOff = y * width * 4;
+            for (let x = 0; x < width; x++) {
+                const idx = rowOff + x * 4;
+                rowLum[x] = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+            }
+            const res = decodeScanline(rowLum);
+            if (res) return res;
+        }
+
+        // 2. Varredura vertical (90° / 270°)
+        const colLum = new Float32Array(height);
+        for (let s = 1; s <= numLines; s++) {
+            const x = Math.floor((width * s) / (numLines + 1));
+            for (let y = 0; y < height; y++) {
+                const idx = (y * width + x) * 4;
+                colLum[y] = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+            }
+            const res = decodeScanline(colLum);
+            if (res) return res;
+        }
+
+        // 3. Varredura diagonal inclinada (±15° e ±28°) para embalagens seguradas tortas
+        const slopes = [-0.52, -0.26, 0.26, 0.52];
+        const diagSteps = Math.max(8, Math.floor(numLines / 3));
+        for (let sl = 0; sl < slopes.length; sl++) {
+            const slope = slopes[sl];
+            for (let s = 1; s <= diagSteps; s++) {
+                const yCenter = Math.floor((height * s) / (diagSteps + 1));
+                for (let x = 0; x < width; x++) {
+                    const y = Math.round(yCenter + (x - width / 2) * slope);
+                    if (y >= 0 && y < height) {
+                        const idx = (y * width + x) * 4;
+                        rowLum[x] = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+                    } else {
+                        rowLum[x] = 255;
+                    }
+                }
+                const res = decodeScanline(rowLum);
+                if (res) return res;
+            }
+        }
+
+        return null;
+    }
+
+    class BrowserMultiFormatReader {
+        constructor() {
+            this._active = false;
+            this._rafId = null;
+            this._stream = null;
+            this._canvas = document.createElement('canvas');
+            this._ctx = this._canvas.getContext('2d', { willReadFrequently: true });
+        }
+
+        _decodeSource(source, sw, sh, numLines = 36) {
+            if (!sw || !sh) return null;
+            const maxDim = 1200;
+            const scale = Math.min(1, maxDim / Math.max(sw, sh));
+            const w = Math.max(1, Math.round(sw * scale));
+            const h = Math.max(1, Math.round(sh * scale));
+
+            this._canvas.width = w;
+            this._canvas.height = h;
+            this._ctx.drawImage(source, 0, 0, w, h);
+            const fullData = this._ctx.getImageData(0, 0, w, h);
+            let res = scanImageData(fullData, numLines);
+            if (res) return res;
+
+            // Segunda passada: recorte central 65%
+            if (sw > 400 && sh > 400) {
+                const cw = Math.round(sw * 0.65);
+                const ch = Math.round(sh * 0.65);
+                const cx = Math.round((sw - cw) / 2);
+                const cy = Math.round((sh - ch) / 2);
+                this._canvas.width = cw;
+                this._canvas.height = ch;
+                this._ctx.drawImage(source, cx, cy, cw, ch, 0, 0, cw, ch);
+                const cropData = this._ctx.getImageData(0, 0, cw, ch);
+                res = scanImageData(cropData, numLines);
+                if (res) return res;
+
+                // Terceira passada: faixa central horizontal (ideal para embalagem segurada na mão)
+                const stripW = Math.round(sw * 0.85);
+                const stripH = Math.round(sh * 0.35);
+                const stripX = Math.round((sw - stripW) / 2);
+                const stripY = Math.round((sh - stripH) / 2);
+                this._canvas.width = stripW;
+                this._canvas.height = stripH;
+                this._ctx.drawImage(source, stripX, stripY, stripW, stripH, 0, 0, stripW, stripH);
+                const stripData = this._ctx.getImageData(0, 0, stripW, stripH);
+                res = scanImageData(stripData, Math.max(24, Math.floor(numLines * 0.8)));
+                if (res) return res;
+            }
+            return null;
+        }
+
+        decodeFromImageElement(img) {
+            return new Promise((resolve, reject) => {
+                const w = img.naturalWidth || img.width;
+                const h = img.naturalHeight || img.height;
+                const res = this._decodeSource(img, w, h, 42);
+                if (res) resolve(res);
+                else reject(new NotFoundException());
+            });
+        }
+
+        decodeFromImageUrl(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    this.decodeFromImageElement(img).then(resolve).catch(reject);
+                };
+                img.onerror = () => reject(new NotFoundException('Falha ao carregar imagem'));
+                img.src = url;
+            });
+        }
+
+        async decodeFromConstraints(constraints, videoElementId, callback) {
+            this.reset();
+            this._active = true;
+            const videoEl = typeof videoElementId === 'string'
+                ? document.getElementById(videoElementId)
+                : videoElementId;
+
+            if (!videoEl) throw new Error('Elemento de vídeo não encontrado');
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                throw new Error('getUserMedia indisponível neste contexto');
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            if (!this._active) {
+                stream.getTracks().forEach(t => t.stop());
+                return;
+            }
+
+            this._stream = stream;
+            videoEl.srcObject = stream;
+            await videoEl.play();
+
+            let nativeDetector = null;
+            if ('BarcodeDetector' in window) {
+                try { nativeDetector = new window.BarcodeDetector(); } catch (e) {}
+            }
+
+            let lastScan = 0;
+            const loop = async (now) => {
+                if (!this._active) return;
+                if (now - lastScan >= 120 && videoEl.readyState >= 2 && videoEl.videoWidth > 0) {
+                    lastScan = now;
+                    try {
+                        if (nativeDetector) {
+                            const codes = await nativeDetector.detect(videoEl);
+                            if (codes && codes.length > 0 && codes[0].rawValue) {
+                                callback(new Result(codes[0].rawValue, codes[0].format || BarcodeFormat.EAN_13), null);
+                                return;
+                            }
+                        }
+                        const res = this._decodeSource(videoEl, videoEl.videoWidth, videoEl.videoHeight, 22);
+                        if (res) {
+                            callback(res, null);
+                            return;
+                        }
+                    } catch (err) {
+                        callback(null, err);
+                    }
+                }
+                this._rafId = requestAnimationFrame(loop);
+            };
+            this._rafId = requestAnimationFrame(loop);
+        }
+
+        reset() {
+            this._active = false;
+            if (this._rafId) {
+                cancelAnimationFrame(this._rafId);
+                this._rafId = null;
+            }
+            if (this._stream) {
+                this._stream.getTracks().forEach(t => t.stop());
+                this._stream = null;
+            }
+        }
+    }
+
+    global.ZXing = {
+        BarcodeFormat,
+        Result,
+        NotFoundException,
+        BrowserMultiFormatReader
+    };
+})(window);
+
+</script>
+<script>
+'use strict';
+const LISTA_PAO_INICIAL = [{"codigo":"7248-105","nome":"BISNAGUINHA PANCO","embalagem":"UND 1 X 1 X 300G"},{"codigo":"65169-128","nome":"BOLO PULLMAM ANA MARIA GOTAS","embalagem":"UND 1 X 1 X 70G"},{"codigo":"65167-109","nome":"BOLO PULLMAM ANA MARIA CHOCOLATE","embalagem":"UND 1 X 1 X 70G"},{"codigo":"67620-126","nome":"PÃO FORMA SEVEN BOYS","embalagem":"PCT 1 X 1 X 450G"},{"codigo":"15752-186","nome":"BOLO PULLMAM ANA MARIA CENOURA/CHOC","embalagem":"UND 1 X 1 X 70G"},{"codigo":"90780-178","nome":"BOLO PULLMAM ANA MARIA TRIPLO CHOC","embalagem":"UND 1 X 1 X 70G"},{"codigo":"65168-169","nome":"BOLO PULLMAM ANA MARIA BAUNILHA","embalagem":"UND 1 X 1 X 70G"},{"codigo":"7243-108","nome":"PÃO FORMA PANCO","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"71618-140","nome":"PÃO FORMA PLUS VITA","embalagem":"PCT 1 X 1 X 480G"},{"codigo":"23692-110","nome":"BISNAGUINHA KIM","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"81019-163","nome":"PÃO FORMA Q-PÃO TRADICIONAL","embalagem":"CXA 1 X 1 X 400G"},{"codigo":"60988-144","nome":"PÃO HAMBURGUER PLUS VITA C/GERGELIM","embalagem":"PCT 1 X 1 X 420G"},{"codigo":"91375-156","nome":"PÃO HAMBURGUER PLUS VITA BRIOCHE","embalagem":"CXA 1 X 1 X 520G"},{"codigo":"89273-131","nome":"PÃO FORMA KIM TRADICIONAL","embalagem":"UND 1 X 1 X 400G"},{"codigo":"46895-163","nome":"PÃO SOVADO PANCO","embalagem":"UND 1 X 1 X 500G"},{"codigo":"72960-121","nome":"BOLINHO PANCO DUPLO CHOCOLATE","embalagem":"CXA 1 X 1 X 70G"},{"codigo":"59590-180","nome":"PÃO FORMA PANCO INTEGRAL","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"70797-180","nome":"PÃO INT.NUTRELLA CASTANHA P/QUINOA","embalagem":"CXA 1 X 1 X 350G"},{"codigo":"21783-183","nome":"PÃO CASEIRO PANCO MILHO","embalagem":"UND 1 X 1 X 500G"},{"codigo":"53462-191","nome":"BOLO PANCO LARANJA","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"66050-127","nome":"PÃO DO FORNO WICKBOLD INTEGRAL","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"71072-117","nome":"PÃO FORMA WICKBOLD INTEGRAL","embalagem":"CXA 1 X 1 X 450G"},{"codigo":"19885-182","nome":"BISNAGUITO PLUS VITA","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"88055-124","nome":"PÃO HAMBURGUER C/GERGELIM MILANI","embalagem":"UND 1 X 1 X 300G"},{"codigo":"76090-139","nome":"PULLMAN RAP 10 ORIGINAL","embalagem":"EMB 1 X 1 X 297G"},{"codigo":"18907-150","nome":"TORTILHA WRAP PANCO TRADICIONAL","embalagem":"PCT 1 X 1 X 270G"},{"codigo":"30861-184","nome":"PÃO HOT DOG KIM","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"87332-124","nome":"PÃO FORMA LEITE PANCO","embalagem":"UND 1 X 1 X 500G"},{"codigo":"43152-140","nome":"BOLO KIM LARANJA","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"72961-187","nome":"BOLINHO PANCO MORANGO","embalagem":"CXA 1 X 1 X 70G"},{"codigo":"76088-142","nome":"PULLMAN RAP 10 FIT","embalagem":"EMB 1 X 1 X 297G"},{"codigo":"21777-146","nome":"BISNAGA PANCO EGG SPONGE","embalagem":"UND 1 X 1 X 250G"},{"codigo":"53459-128","nome":"BOLO PANCO CHOCOBOY","embalagem":"UND 1 X 1 X 300G"},{"codigo":"72959-184","nome":"BOLINHO PANCO BAUNILHA","embalagem":"CXA 1 X 1 X 70G"},{"codigo":"70798-139","nome":"PÃO INT.NUTRELLA ABOBORA/LINHACA","embalagem":"CXA 1 X 1 X 350G"},{"codigo":"88054-165","nome":"PÃO HAMB.BRIOCHE GOURMET MILANI","embalagem":"UND 1 X 1 X 360G"},{"codigo":"70795-161","nome":"PÃO INT.NUTRELLA CRANBERRY/QUINOA","embalagem":"CXA 1 X 1 X 350G"},{"codigo":"23192-155","nome":"PÃO CASEIRO PANCO COCO","embalagem":"UND 1 X 1 X 350G"},{"codigo":"90779-140","nome":"BOLO PULLMAM ANA MARIA AVELÃ","embalagem":"UND 1 X 1 X 42G"},{"codigo":"76089-101","nome":"PULLMAN RAP 10 INTEGRAL","embalagem":"EMB 1 X 1 X 297G"},{"codigo":"89997-163","nome":"PÃO WICKBOLD MAÇÃ/CANELA/PASSAS","embalagem":"UND 1 X 1 X 450G"},{"codigo":"23700-160","nome":"PÃO WICKBOLD NA CHAPA","embalagem":"UND 1 X 1 X 450G"},{"codigo":"43150-115","nome":"TORTILHA WRAP PANCO INTEGRAL","embalagem":"UND 1 X 1 X 250G"},{"codigo":"74193-107","nome":"PÃO DO FORNO WICKBOLD AUSTRALIANO","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"75705-149","nome":"PÃO INT.NUTRELLA AVEIA/GRAOS","embalagem":"CXA 1 X 1 X 500G"},{"codigo":"53460-166","nome":"BOLO PANCO ABACAXI","embalagem":"EMB 1 X 1 X 350G"},{"codigo":"59731-158","nome":"BOLO PANCO GOTAS CHOCOLATE","embalagem":"UND 1 X 1 X 300G"},{"codigo":"53461-131","nome":"BOLO PANCO COCO","embalagem":"UND 1 X 1 X 300G"},{"codigo":"69474-175","nome":"TA PRONTO WICKBOLD TRADICIONAL","embalagem":"CXA 1 X 1 X 270G"},{"codigo":"85107-120","nome":"PÃO HAMBURGUER BAUDUCCO","embalagem":"CXA 1 X 10 X 200G"},{"codigo":"89272-172","nome":"PÃO FORMA KIM INTEGRAL","embalagem":"UND 1 X 1 X 400G"},{"codigo":"88056-184","nome":"PÃO HAMBURGUER TRADICIONAL MILANI","embalagem":"UND 1 X 1 X 360G"},{"codigo":"88057-143","nome":"PÃO HOT DOG MILANI","embalagem":"UND 1 X 1 X 400G"},{"codigo":"28625-131","nome":"BOLINHO STA EDWIGES BRIG/CHOC","embalagem":"CXA 8 X 15 X 40G"},{"codigo":"28626-191","nome":"BOLO STA EDWIGES CHOC/CHOC","embalagem":"CXA 1 X 24 X 250G"},{"codigo":"82244-170","nome":"PÃO FORMA VISCONTI INTEGRAL","embalagem":"CXA 1 X 10 X 400G"},{"codigo":"53874-152","nome":"PÃO FORMA KIM CASTANHA P/QUINOA","embalagem":"PCT 1 X 1 X 400G"},{"codigo":"53872-133","nome":"BISNAGUINHA KIM INTEGRAL","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"5809-156","nome":"BOLINHO STA EDWIGES CHOC/MARSHMALLOW","embalagem":"CXA 8 X 15 X 40G"},{"codigo":"47651-128","nome":"BOLO STA EDWIGES CHOCOLATE","embalagem":"CXA 1 X 24 X 200G"},{"codigo":"50538-190","nome":"BOLO PLUS VITA LARANJA","embalagem":"UND 1 X 1 X 250G"},{"codigo":"71619-100","nome":"PÃO FORMA PLUS VITA INTEGRAL","embalagem":"PCT 1 X 1 X 480G"},{"codigo":"82245-129","nome":"PÃO FORMA VISCONTI TRADICIONAL","embalagem":"CXA 1 X 10 X 400G"},{"codigo":"53875-111","nome":"PÃO FORMA KIM CHIA/MACAD.","embalagem":"PCT 1 X 1 X 400G"},{"codigo":"88008-197","nome":"BOLINHO STA EDWIGES MGO/MARSHMALLOW","embalagem":"CXA 8 X 15 X 40G"},{"codigo":"82180-109","nome":"BISNAGA PLUS VITA ARTESANO NA CHAPA","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"8940-160","nome":"PAEZINHOS CEBOLA MILANI","embalagem":"UND 1 X 1 X 250G"},{"codigo":"89412-125","nome":"PAEZINHOS CENOURA MILANI","embalagem":"UND 1 X 1 X 250G"},{"codigo":"54953-125","nome":"BOLO STA EDWIGES MOUSSE LIMAO","embalagem":"CXA 1 X 24 X 250G"},{"codigo":"59211-146","nome":"BOLINHO BAUDUCCO DUO CHOCOLATE","embalagem":"CXA 6 X 15 X 27G"},{"codigo":"72754-104","nome":"BOLO STA EDWIGES MESCLADO","embalagem":"CXA 1 X 24 X 200G"},{"codigo":"73791-137","nome":"PÃO HOT DOG Q-PÃO","embalagem":"PCT 1 X 1 X 1200G"},{"codigo":"81856-115","nome":"BOLINHO BAUDUCCO BAUN/MGO","embalagem":"CXA 9 X 16 X 40G"},{"codigo":"81857-175","nome":"BOLINHO BAUDUCCO BAUN/CHOC","embalagem":"CXA 9 X 16 X 40G"},{"codigo":"85134-195","nome":"BISNAGUINHA VISCONTI","embalagem":"CXA 1 X 9 X 240G"},{"codigo":"93817-157","nome":"BOLINHO BAUDUCCO GOTAS CHOCOLATE","embalagem":"CXA 9 X 16 X 40G"},{"codigo":"8936-144","nome":"BISNAGUINHA TRADICIONAL MILANI","embalagem":"UND 1 X 1 X 250G"},{"codigo":"36752-182","nome":"BOLO STA EDWIGES CENOURA/CHOCA","embalagem":"CXA 1 X 24 X 250G"},{"codigo":"47650-163","nome":"BOLO STA EDWIGES GOTAS CHOCOLATE","embalagem":"CXA 1 X 24 X 200G"},{"codigo":"81858-134","nome":"BOLINHO BAUDUCCO DUPLO CHOCOLATE","embalagem":"CXA 9 X 16 X 40G"},{"codigo":"16471-107","nome":"BOLINHO BAUDUCCO DUO FINI","embalagem":"CXA 6 X 15 X 30G"},{"codigo":"59212-105","nome":"BOLINHO BAUDUCCO ROLL CAKE CHOC.","embalagem":"CXA 6 X 15 X 34G"},{"codigo":"72753-145","nome":"BOLO STA EDWIGES LARANJA","embalagem":"CXA 1 X 24 X 200G"},{"codigo":"82243-110","nome":"PÃO FORMA BAUDUCCO TRADICIONAL","embalagem":"CXA 1 X 10 X 390G"},{"codigo":"85108-180","nome":"PÃO HOT DOG BAUDUCCO","embalagem":"CXA 1 X 9 X 200G"},{"codigo":"75552-198","nome":"PÃO PLUS VITA ARTESANO CHAPA","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"43151-181","nome":"BOLO KIM COCO","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"43149-178","nome":"BOLO KIM ABACAXI","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"65170-166","nome":"BOLO PULLMAM ANA MARIA NAPOLITANA","embalagem":"UND 1 X 1 X 42G"},{"codigo":"89277-169","nome":"BOLO KIM MINI BAUNILHA/C.CHOC.","embalagem":"CXA 1 X 120 X 70G"},{"codigo":"92065-113","nome":"PÃO FORMA AVEIA/LIN/CHI/QUI 5 ZEROS","embalagem":"UND 1 X 1 X 400G"},{"codigo":"30860-118","nome":"PÃO HAMBURGUER KIM","embalagem":"PCT 1 X 1 X 200G"},{"codigo":"96223-145","nome":"PÃO ARTESANALE PANCO INTEGRAL","embalagem":"UND 1 X 1 X 350G"},{"codigo":"32144-184","nome":"BISNAGUINHA SEVEN BOYS","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"84757-178","nome":"BISNAGUINHAS INTEGRAIS PANCO","embalagem":"PCT 1 X 1 X 300G"},{"codigo":"86246-181","nome":"BOLO PULLMAM ANA MARIA CENOURA/CHOC","embalagem":"UND 1 X 1 X 35G"},{"codigo":"95218-166","nome":"BOLO PULLMAM ANA MARIA PÃO DE MEL","embalagem":"UND 1 X 1 X 45G"},{"codigo":"96222-186","nome":"PÃO ARTESANALE PANCO ALECRIM/AZEITE","embalagem":"UND 1 X 1 X 350G"},{"codigo":"89279-188","nome":"BOLO KIM MINI CHOCOLATE/C.CHOC.","embalagem":"CXA 1 X 120 X 70G"},{"codigo":"5411-141","nome":"PÃO ARTESANALE PANCO COCO","embalagem":"UND 1 X 1 X 350G"},{"codigo":"13872-137","nome":"PÃO FORMA BULNEZ","embalagem":"UND 1 X 1 X 400G"},{"codigo":"74192-148","nome":"PÃO HAMBURGUER KIM C/GERGELIM","embalagem":"CXA 1 X 1 X 200G"},{"codigo":"89991-106","nome":"PÃO MILHO SEVEN BOYS","embalagem":"UND 1 X 1 X 450G"},{"codigo":"53458-164","nome":"SOVADINHO PANCO","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"17467-189","nome":"BOLO PANCO MORANGO","embalagem":"PCT 1 X 1 X 210G"},{"codigo":"89989-103","nome":"PÃO WICKBOLD CHIA MACADAMIA","embalagem":"UND 1 X 1 X 350G"},{"codigo":"17468-143","nome":"BOLO BEBEZINHO PANCO CHOCOLATE","embalagem":"PCT 1 X 1 X 210G"},{"codigo":"5413-160","nome":"PÃO DO FORNO WICKBOLD ORIGINAL","embalagem":"UND 1 X 1 X 450G"},{"codigo":"28623-112","nome":"BOLINHO STA EDWIGES BAUN/CHOC","embalagem":"CXA 8 X 15 X 40G"},{"codigo":"85860-123","nome":"PÃO FORMA WICKBOLD F.FIBRAS 5 ZEROS","embalagem":"UND 1 X 1 X 400G"},{"codigo":"86274-140","nome":"BOLO PULLMAM ANA MARIA DUPLO CHOC","embalagem":"UND 1 X 1 X 35G"},{"codigo":"57841-131","nome":"PÃO PLUS VITA ARTESANO","embalagem":"PCT 1 X 1 X 500G"},{"codigo":"65171-131","nome":"BOLO PULLMAM ANA MARIA COBET.CHOC","embalagem":"UND 1 X 1 X 42G"},{"codigo":"89282-195","nome":"BOLO KIM MINI BAUNILHA/C/BAUN.","embalagem":"CXA 1 X 120 X 70G"},{"codigo":"89996-103","nome":"PÃO WICKBOLD CASTANHA/QUINOA","embalagem":"UND 1 X 1 X 450G"},{"codigo":"67621-192","nome":"PÃO LEITE SEVEN BOYS","embalagem":"PCT 1 X 1 X 450G"},{"codigo":"89274-191","nome":"BOLO KIM MINI CHOCOLATE/C/BAUN.","embalagem":"CXA 1 X 120 X 70G"},{"codigo":"89276-109","nome":"BOLO KIM MINI BAUNILHA/C/MORANGO","embalagem":"CXA 1 X 120 X 70G"},{"codigo":"88942-185","nome":"PAEZINHOS MILHO MILANI","embalagem":"UND 1 X 1 X 250G"},{"codigo":"43153-100","nome":"BOLO KIM MESCLADO","embalagem":"PCT 1 X 1 X 250G"},{"codigo":"84756-118","nome":"PÃO FORMA PANCO VIDA 100 15 GRÃOS","embalagem":"CXA 1 X 1 X 380G"},{"codigo":"15350-197","nome":"PÃO ARTESANALE PANCO MILHO","embalagem":"UND 1 X 1 X 350G"},{"codigo":"19176-125","nome":"PÃO ARTESANALE PANCO VIDA ZERO","embalagem":"PCT 1 X 1 X 350G"},{"codigo":"73789-134","nome":"PÃO HAMBURGUER Q-PÃO","embalagem":"PCT 1 X 1 X 1200G"},{"codigo":"92064-154","nome":"PÃO FORNO WICKBOLD BRIOCHE","embalagem":"UND 1 X 1 X 450G"},{"codigo":"69465-156","nome":"PÃO FORMA KIM NOBRE","embalagem":"CXA 1 X 1 X 500G"},{"codigo":"84753-140","nome":"PÃO FORMA PANCO VIDA 100 ZERO","embalagem":"CXA 1 X 1 X 380G"},{"codigo":"30769-168","nome":"PÃO INTEGRAL Q-PÃO LIGHT","embalagem":"PCT 1 X 1 X 400G"},{"codigo":"8939-122","nome":"PAEZINHOS BATATA MILANI","embalagem":"UND 1 X 1 X 250G"},{"codigo":"73273-144","nome":"PÃO INTEGRAL NUTRELLA SUPREME","embalagem":"CXA 1 X 1 X 450G"},{"codigo":"96221-126","nome":"PÃO ARTESANALE PANCO ORIGINAL","embalagem":"UND 1 X 1 X 350G"},{"codigo":"62793-159","nome":"PÃO MILHO Q-PÃO","embalagem":"PCT 1 X 1 X 450G"},{"codigo":"73274-103","nome":"PÃO INTEGRAL NUTRELLA SUPREME FRUTA","embalagem":"CXA 1 X 1 X 500G"},{"codigo":"81018-103","nome":"BISNAGUINHA Q-PÃO","embalagem":"CXA 1 X 1 X 220G"},{"codigo":"64329-100","nome":"PÃO PLUS VITA ARTESANO INTEGRAL","embalagem":"CXA 1 X 1 X 500G"}];
+const BRAND_DEFS = [
+ {name:'STA EDWIGES',aliases:['STA EDWIGES','SANTA EDWIGES']},
+ {name:'SEVEN BOYS',aliases:['SEVEN BOYS']},
+ {name:'PLUS VITA',aliases:['PLUS VITA']},
+ {name:'PULLMAN',aliases:['PULLMAN','PULLMAM']},
+ {name:'WICKBOLD',aliases:['WICKBOLD']},
+ {name:'NUTRELLA',aliases:['NUTRELLA']},
+ {name:'BAUDUCCO',aliases:['BAUDUCCO']},
+ {name:'VISCONTI',aliases:['VISCONTI']},
+ {name:'BULNEZ',aliases:['BULNEZ']},
+ {name:'MILANI',aliases:['MILANI']},
+ {name:'PANCO',aliases:['PANCO']},
+ {name:'Q-PÃO',aliases:['Q-PÃO','Q PAO','QPAO']},
+ {name:'KIM',aliases:['KIM']}
+];
+const DB_NAME='BLDigital_Recriado', DB_VERSION=1, STORE='state', STATE_KEY='main';
+const LS_KEY='BLDigital_Recriado_State_v1';
+let db=null, state={revision:0,updatedAt:0,products:[],history:[],calcHistory:[],confirmedBrands:[],rejectedBrandWords:[]};
+let activeSearchBrand='TODOS',activeGuideBrand='TODOS',activeHistoryBrand='TODOS',editing=false,editCode=null,toastTimer=null,stream=null,scanLoop=0;
+const $=id=>document.getElementById(id);
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),2600)}
+function norm(s){return String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim()}
+function cleanCode(s){return String(s??'').trim().replace(/\s+/g,'')}
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const STOP_WORDS=new Set(['DE','DA','DO','DAS','DOS','TA','COM','SEM','PARA','POR','E','EM','NA','NO','NAS','NOS','A','O','AS','OS','UM','UMA','UND','UN','PCT','CXA','EMB','KG','G','ML','L','X','C','1','2','3','4','5','ZERO','ZEROS']);
+const FEATURE_WORDS=new Set(['FATIADO','FATIADA','FRANCES','FRANCESA','FORMA','HOT','DOG','HAMBURGUER','HAMBURGUES','QUI','CHI','LIN','LINHACA','MACAD','MACADAMIA','AVEIA','GRAOS','GRAO','TIPO','PRONTO','PRONTA','INTEGRAL','TRADICIONAL','ORIGINAL','LIGHT','FIT','ALCALINA','RECARREGAVEL','MOIDA','MOIDO','BOVINA','SUINA','FRANGO','CONGELADO','CONGELADA','RESFRIADO','RESFRIADA','DEFUMADO','DEFUMADA','SEM','ACUCAR','ZERO','LACTOSE','DESNATADO','INTEGRAL','PASTEURIZADO','BRIOCHE','ARTESANO','ARTESANAL','CASEIRO','CASEIRA','AUSTRALIANO','GOURMET','DOCE','SALGADO','SALGADA','PICANTE','NATURAL','VEGANO','VEGANA','ORGANICO','ORGANICA','PEQUENO','PEQUENA','MEDIO','MEDIA','GRANDE','MINI','DUPLO','DUPLA','RECHEADO','RECHEADA','CHOCOLATE','MORANGO','BAUNILHA','COCO','LARANJA','MILHO','AVEIA','CASTANHA','QUINOA','GERGELIM','CEBOLA','CENOURA','BATATA','ORIGINAL']);
+// Funções-base de produto e armazenamento (declaradas antes dos eventos).
+function makeProduct(codigo,nome,embalagem='',marca=''){
+ return {codigo:cleanCode(codigo),nome:String(nome??'').trim(),embalagem:String(embalagem??'').trim(),marca:String(marca??'').trim()};
+}
+function validProduct(p){return !!(p&&p.codigo&&p.nome)}
+function normalizeState(raw){
+ if(!raw||typeof raw!=='object')return null;
+ return {revision:Number(raw.revision)||0,updatedAt:Number(raw.updatedAt)||0,
+  products:Array.isArray(raw.products)?raw.products.filter(validProduct).map(p=>makeProduct(p.codigo,p.nome,p.embalagem,p.marca)):[],
+  confirmedBrands:Array.isArray(raw.confirmedBrands)?raw.confirmedBrands.map(norm).filter(Boolean):[],rejectedBrandWords:Array.isArray(raw.rejectedBrandWords)?raw.rejectedBrandWords.map(norm).filter(Boolean):[],
+  history:Array.isArray(raw.history)?raw.history.map(h=>({...h,products:Array.isArray(h.products)?h.products.filter(validProduct).map(p=>makeProduct(p.codigo,p.nome,p.embalagem,p.marca)):[]})):[],
+  calcHistory:Array.isArray(raw.calcHistory)?raw.calcHistory:[]};
+}
+function testLocalStorage(){try{const k='__bldigital_test__';localStorage.setItem(k,'1');localStorage.removeItem(k);return true}catch(e){return false}}
+function requestPersistentStorage(){return navigator.storage?.persist?navigator.storage.persist().catch(()=>false):Promise.resolve(false)}
+function openDatabase(){return new Promise((resolve,reject)=>{
+  if(!('indexedDB' in window)){reject(new Error('IndexedDB indisponível'));return}
+  const req=indexedDB.open(DB_NAME,DB_VERSION);
+  req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE)};
+  req.onsuccess=()=>{db=req.result;resolve(db)};req.onerror=()=>reject(req.error||new Error('Falha ao abrir IndexedDB'));
+ });}
+function idbRead(){return new Promise((resolve,reject)=>{if(!db){resolve(null);return}const tx=db.transaction(STORE,'readonly'),r=tx.objectStore(STORE).get(STATE_KEY);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>reject(r.error)})}
+function idbWrite(value){return new Promise((resolve,reject)=>{if(!db){reject(new Error('Banco local não aberto'));return}const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(value,STATE_KEY);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Gravação cancelada'))})}
+async function persist(){state.revision=(state.revision||0)+1;state.updatedAt=Date.now();const snapshot=JSON.parse(JSON.stringify(state));let saved=false;try{await idbWrite(snapshot);saved=true}catch(e){console.warn('IndexedDB:',e)}try{localStorage.setItem(LS_KEY,JSON.stringify(snapshot));saved=true}catch(e){console.warn('localStorage:',e)}if(!saved)throw new Error('Não foi possível gravar no armazenamento local. Exporte um backup.')}
+async function initStorage(){
+ let fromIdb=null,fromLS=null;
+ try{await openDatabase();fromIdb=normalizeState(await idbRead())}catch(e){console.warn('IndexedDB indisponível:',e)}
+ try{fromLS=normalizeState(JSON.parse(localStorage.getItem(LS_KEY)||'null'))}catch(e){console.warn('localStorage indisponível:',e)}
+ // Seleciona a cópia mais recente; evita que um catálogo vazio antigo sobrescreva dados novos.
+ const candidates=[fromIdb,fromLS].filter(Boolean).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+ state=candidates[0]||{revision:0,updatedAt:0,products:[],history:[],calcHistory:[],confirmedBrands:[],rejectedBrandWords:[]};
+ state.confirmedBrands=Array.isArray(state.confirmedBrands)?state.confirmedBrands:[];state.rejectedBrandWords=Array.isArray(state.rejectedBrandWords)?state.rejectedBrandWords:[];
+ if(!state.history.some(h=>h.id==='lista-pao'))state.history.unshift({id:'lista-pao',name:'Lista do Pão',createdAt:'2026-11-19T00:00:00.000Z',products:LISTA_PAO_INICIAL.map(p=>({...p}))});
+ await persist();
+ $('storageBadge').textContent=db?'● Banco local pronto':'⚠ Armazenamento limitado';
+ renderAll();
+}
+function tokensProduto(p){return norm(p?.nome||'').split(' ').filter(t=>t.length>=3&&!STOP_WORDS.has(t)&&!/^[0-9]+$/.test(t))}
+function allProductsForBrandReview(){return [...state.products,...state.history.flatMap(h=>h.products||[])]}
+function knownBrandMatch(name, brands){
+ const n=' '+norm(name)+' ';
+ for(const b of brands){const aliases=[b.name,...(b.aliases||[])];for(const alias of aliases){const a=norm(alias);if(a&&n.includes(' '+a+' '))return b.name}}
+ return '';
+}
+function getBrand(p){
+ const explicit=norm(p?.marca||'');if(explicit)return explicit;
+ const known=knownBrandMatch(p?.nome||'',BRAND_DEFS);if(known)return known;
+ const confirmed=(state.confirmedBrands||[]).map(name=>({name,aliases:[name]}));
+ return knownBrandMatch(p?.nome||'',confirmed);
+}
+const BRAND_EXCLUDE_WORDS=new Set([...STOP_WORDS,'PAO','PAES','PAEZINHO','PAEZINHOS','BISNAGUINHA','BISNAGUINHAS','BISNAGA','BISNAGUITO','BOLO','BOLINHO','PILHA','PILHAS','CARNE','LEITE','ARROZ','FEIJAO','MACARRAO','ACUCAR','CAFE','OLEO','FARINHA','BISCOITO','BOLACHA','SUCO','REFRIGERANTE','AGUA','QUEIJO','IOGURTE','MANTEIGA','MARGARINA','SABAO','DETERGENTE','AMACIANTE','PAPEL','FRALDA','SHAMPOO','CONDICIONADOR','SABONETE','CREME','RACAO','OVO','OVOS','FRANGO','PEIXE','LINGUICA','PRESUNTO','MORTADELA','CHOCOLATE','BALA','PIRULITO','SORVETE','PIZZA','TORTILHA','WRAP','SOVADO','SOVADINHO','FATIADO','FATIADA','FRANCES','FRANCESA','FORMA','HOT','DOG','HAMBURGUER','HAMBURGUES','INTEGRAL','TRADICIONAL','ORIGINAL','LIGHT','FIT','ALCALINA','RECARREGAVEL','MOIDA','MOIDO','BOVINA','SUINA','CONGELADO','CONGELADA','RESFRIADO','RESFRIADA','DEFUMADO','DEFUMADA','ACUCAR','ZERO','LACTOSE','DESNATADO','PASTEURIZADO','BRIOCHE','ARTESANO','ARTESANAL','CASEIRO','CASEIRA','AUSTRALIANO','GOURMET','DOCE','SALGADO','SALGADA','PICANTE','NATURAL','VEGANO','VEGANA','ORGANICO','ORGANICA','PEQUENO','PEQUENA','MEDIO','MEDIA','GRANDE','MINI','DUPLO','DUPLA','RECHEADO','RECHEADA','MORANGO','BAUNILHA','COCO','LARANJA','MILHO','AVEIA','CASTANHA','QUINOA','GERGELIM','CEBOLA','CENOURA','BATATA','AAA','AA','AA A']);
+function pendingBrandCandidates(){
+ const known=new Set([...(state.confirmedBrands||[]),...BRAND_DEFS.map(b=>b.name)].map(norm));
+ const rejected=new Set((state.rejectedBrandWords||[]).map(norm));
+ const counts=new Map();
+ for(const p of allProductsForBrandReview()){
+  if(norm(p.marca))continue;
+  const brand=getBrand(p);if(brand)continue;
+  for(const word of tokensProduto(p)){
+   if(BRAND_EXCLUDE_WORDS.has(word)||known.has(word)||rejected.has(word))continue;
+   counts.set(word,(counts.get(word)||0)+1);
+  }
+ }
+ return [...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).map(([word,count])=>({word,count})).slice(0,40);
+}
+function renderBrandReview(){const box=$('brandReviewList');if(!box)return;const items=pendingBrandCandidates();box.innerHTML=items.length?items.map(x=>`<div class="history-item"><div class="history-top"><div><b>${escapeHTML(x.word)}</b><div class="history-meta">Encontrada em ${x.count} produto(s)</div></div><div class="row" style="max-width:190px"><button class="btn small" data-confirm-brand="${escapeHTML(x.word)}">É marca</button><button class="btn danger small" data-reject-brand="${escapeHTML(x.word)}">Ignorar</button></div></div></div>`).join(''):'<div class="empty">Nenhuma palavra aguardando confirmação.</div>';box.querySelectorAll('[data-confirm-brand]').forEach(b=>b.addEventListener('click',()=>reviewBrand(b.dataset.confirmBrand,true)));box.querySelectorAll('[data-reject-brand]').forEach(b=>b.addEventListener('click',()=>reviewBrand(b.dataset.rejectBrand,false)));}
+async function reviewBrand(word,confirmed){const value=norm(word);if(!value)return;if(confirmed){if(!state.confirmedBrands.includes(value))state.confirmedBrands.push(value);state.rejectedBrandWords=state.rejectedBrandWords.filter(x=>x!==value)}else{if(!state.rejectedBrandWords.includes(value))state.rejectedBrandWords.push(value);state.confirmedBrands=state.confirmedBrands.filter(x=>x!==value)}await persist();renderAll();toast(confirmed?value+' reconhecida como marca':'Palavra ignorada');}
+function countTerms(list,getter){const c=new Map();for(const p of list){const terms=getter(p)||[];for(const term of (Array.isArray(terms)?terms:[terms]))if(term)c.set(term,(c.get(term)||0)+1)}return [...c].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).map(([name,count])=>({name,count}))}
+function brandsFor(list){return countTerms(list,getBrand)}
+function filtered(list,brand='TODOS'){return list.filter(p=>brand==='TODOS'||getBrand(p)===brand)}
+function pills(target,list,active,handler){
+ const terms=brandsFor(list);const html=[`<button class="pill ${active==='TODOS'?'active':''}" data-brand="TODOS">Todas (${list.length})</button>`,...terms.map(b=>`<button class="pill ${active===b.name?'active':''}" data-brand="${escapeHTML(b.name)}">${escapeHTML(b.name)} (${b.count})</button>`)].join('');
+ $(target).innerHTML=html;$(target).querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>handler(btn.dataset.brand)));
+}
+
+function renderProduct(p,actions=true){const brand=getBrand(p);const controls=actions?`<div class="actions"><button class="btn secondary small" data-edit="${escapeHTML(p.codigo)}">Editar</button><button class="btn danger small" data-delete="${escapeHTML(p.codigo)}">×</button></div>`:'';return `<article class="product"><div><div class="code">${escapeHTML(p.codigo)}</div><div class="pname">${escapeHTML(p.nome)}</div><div class="pmeta">${escapeHTML(p.embalagem||'Sem medida')}${brand?' • '+escapeHTML(brand):''}</div></div>${controls}</article>`}
+function bindProductActions(root){root.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>editProduct(b.dataset.edit)));root.querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>deleteProduct(b.dataset.delete)))}
+function renderList(target,list,actions=true){$(target).innerHTML=list.length?list.map(p=>renderProduct(p,actions)).join(''):'<div class="empty"><b>Nenhum produto encontrado</b>Cadastre ou importe produtos para preencher esta lista.</div>';if(actions)bindProductActions($(target))}
+function renderAll(){ $('metricProducts').textContent=state.products.length;$('metricBrands').textContent=brandsFor(state.products).length;$('metricLists').textContent=state.history.length;renderSearch();renderGuide();renderHistory();renderCalcHistory();renderBrandReview() }
+function renderSearch(){
+ const savedList=state.history.find(h=>h.id==='lista-pao');
+ if(state.products.length){
+  pills('searchFilters',state.products,activeSearchBrand,b=>{activeSearchBrand=b;renderSearch()});
+ }else if(savedList){
+  const terms=brandsFor(savedList.products||[]);
+  $('searchFilters').innerHTML=`<button class="pill active" data-brand="TODOS">Marcas da Lista do Pão</button>`+terms.map(b=>`<button class="pill" data-brand="${escapeHTML(b.name)}">${escapeHTML(b.name)} (${b.count})</button>`).join('');
+  $('searchFilters').querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{viewingHistory=savedList;switchTab('history');$('historyList').classList.add('hidden');$('historyViewer').classList.remove('hidden');$('historyViewerTitle').textContent=savedList.name;activeHistoryBrand=btn.dataset.brand;renderHistoryViewer()}));
+ }else{$('searchFilters').innerHTML='<span class="sub">Cadastre ou importe produtos para gerar filtros de marcas.</span>'}
+ const q=norm($('searchInput').value);let list=filtered(state.products,activeSearchBrand);if(q)list=list.map(p=>({p,score:scoreSearch(p,q)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).map(x=>x.p);$('searchCount').textContent=`${list.length} produto(s) encontrado(s)`;$('searchBrandActive').textContent=activeSearchBrand==='TODOS'?'Todas as marcas':activeSearchBrand;renderList('searchResults',list)
+}
+function scoreSearch(p,q){const code=norm(p.codigo),name=norm(p.nome),brand=norm(getBrand(p));if(code===q)return 1000;if(code.includes(q))return 800;if(name===q)return 700;if(name.includes(q))return 500;if(brand.includes(q))return 400;const tokens=q.split(' ');let score=0;for(const t of tokens){if(name.includes(t))score+=80;else if(t.length>3&&name.split(' ').some(w=>levenshtein(t,w)<=1))score+=30;else return 0}return score}
+function levenshtein(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
+function renderGuide(){
+ if(state.products.length)pills('guideFilters',state.products,activeGuideBrand,b=>{activeGuideBrand=b;renderGuide()});
+ else{$('guideFilters').innerHTML='<span class="sub">O catálogo está vazio. As marcas da Lista do Pão ficam disponíveis na Busca e no Histórico.</span>'}
+ const list=filtered(state.products,activeGuideBrand);$('guideCount').textContent=`Mostrando ${list.length} de ${state.products.length} produto(s)`;renderList('guideResults',list)
+}
+function renderHistory(){const box=$('historyList');if(!$('historyViewer').classList.contains('hidden'))return;box.innerHTML=state.history.length?state.history.map(h=>`<div class="history-item"><div class="history-top"><div><div class="history-name">${escapeHTML(h.name)}</div><div class="history-meta">${(h.products||[]).length} produtos • ${new Date(h.createdAt||Date.now()).toLocaleDateString('pt-BR')}</div></div><button class="btn secondary small" data-open-history="${escapeHTML(h.id)}">Abrir</button></div><div class="row" style="margin-top:9px"><button class="btn ghost small" data-restore-history="${escapeHTML(h.id)}">Carregar no catálogo</button>${h.id!=='lista-pao'?`<button class="btn danger small" data-remove-history="${escapeHTML(h.id)}">Excluir</button>`:''}</div></div>`).join(''):'<div class="empty"><b>Histórico vazio</b>Salve uma lista para encontrá-la aqui.</div>';box.querySelectorAll('[data-open-history]').forEach(b=>b.addEventListener('click',()=>openHistory(b.dataset.openHistory)));box.querySelectorAll('[data-restore-history]').forEach(b=>b.addEventListener('click',()=>restoreHistory(b.dataset.restoreHistory)));box.querySelectorAll('[data-remove-history]').forEach(b=>b.addEventListener('click',()=>removeHistory(b.dataset.removeHistory)))}
+let viewingHistory=null;
+function openHistory(id){viewingHistory=state.history.find(h=>h.id===id);if(!viewingHistory)return;$('historyList').classList.add('hidden');$('historyViewer').classList.remove('hidden');$('historyViewerTitle').textContent=viewingHistory.name;activeHistoryBrand='TODOS';renderHistoryViewer()}
+function renderHistoryViewer(){const list=viewingHistory?.products||[];pills('historyFilters',list,activeHistoryBrand,b=>{activeHistoryBrand=b;renderHistoryViewer()});const shown=filtered(list,activeHistoryBrand);$('historyViewerCount').textContent=`${shown.length} produto(s)`;renderList('historyViewerProducts',shown,false)}
+function closeHistory(){viewingHistory=null;$('historyViewer').classList.add('hidden');$('historyList').classList.remove('hidden');renderHistory()}
+async function restoreHistory(id){const h=state.history.find(x=>x.id===id);if(!h)return;if(!confirm(`Carregar "${h.name}" no catálogo ativo? Os produtos atuais serão substituídos.`))return;state.products=(h.products||[]).map(p=>({...p}));activeGuideBrand=activeSearchBrand='TODOS';await persist();renderAll();toast('Lista carregada no catálogo')}
+async function removeHistory(id){if(!confirm('Excluir esta lista do histórico?'))return;state.history=state.history.filter(h=>h.id!==id);await persist();renderHistory();$('metricLists').textContent=state.history.length;toast('Lista excluída')}
+async function saveCurrentList(){if(!state.products.length){toast('O catálogo está vazio');return}const name=prompt('Nome da lista:','Lista '+new Date().toLocaleDateString('pt-BR'));if(!name?.trim())return;state.history.unshift({id:'hist-'+Date.now(),name:name.trim(),createdAt:new Date().toISOString(),products:state.products.map(p=>({...p}))});await persist();renderAll();toast('Lista salva no histórico')}
+function editProduct(code){const p=state.products.find(x=>x.codigo===code);if(!p)return;$('editOriginalCode').value=p.codigo;$('editCode').value=p.codigo;$('editName').value=p.nome;$('editMeasure').value=p.embalagem||'';$('editBrand').value=p.marca||'';$('editModal').classList.add('open')}
+async function confirmEdit(){const original=$('editOriginalCode').value;const p=makeProduct($('editCode').value,$('editName').value,$('editMeasure').value,$('editBrand').value);if(!validProduct(p)){toast('Código e nome são obrigatórios');return}if(p.codigo!==original&&state.products.some(x=>x.codigo===p.codigo)){toast('Já existe produto com esse código');return}const i=state.products.findIndex(x=>x.codigo===original);if(i<0)return;state.products[i]=p;$('editModal').classList.remove('open');await persist();renderAll();toast('Produto atualizado')}
+async function deleteProduct(code){if(!confirm(`Remover o produto ${code}?`))return;state.products=state.products.filter(p=>p.codigo!==code);await persist();renderAll();toast('Produto removido')}
+async function saveProduct(){const p=makeProduct($('productCode').value,$('productName').value,$('productMeasure').value,$('productBrand').value);if(!validProduct(p)){toast('Informe código e nome');return}const i=state.products.findIndex(x=>x.codigo===p.codigo);if(i>=0)state.products[i]=p;else state.products.unshift(p);await persist();$('productCode').value=$('productName').value=$('productMeasure').value=$('productBrand').value='';renderAll();toast(i>=0?'Produto atualizado':'Produto cadastrado')}
+function parseBulkLine(line){const sep=line.includes('|')?'|':(line.includes(';')?';':',');const parts=line.split(sep).map(x=>x.trim());if(parts.length<2)return null;return makeProduct(parts[0],parts[1],parts.slice(2,3).join(' '),parts[3]||'')}
+async function importText(){const lines=$('bulkText').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);let added=0,updated=0,invalid=0;for(const line of lines){const p=parseBulkLine(line);if(!p||!validProduct(p)){invalid++;continue}const i=state.products.findIndex(x=>x.codigo===p.codigo);if(i>=0){state.products[i]=p;updated++}else{state.products.push(p);added++}}if(!added&&!updated){toast('Nenhum produto válido encontrado');return}await persist();$('bulkText').value='';renderAll();toast(`${added} novos • ${updated} atualizados • ${invalid} ignorados`)}
+async function importJSON(file){try{const data=JSON.parse(await file.text());if(data?.state&&Array.isArray(data.state.products)){if(!confirm('Este arquivo é um backup completo. Restaurar catálogo, histórico e calculadora?'))return;state=normalizeState(data.state)||state;if(!state.history.some(x=>x.id==='lista-pao'))state.history.unshift({id:'lista-pao',name:'Lista do Pão',createdAt:'2026-11-19T00:00:00.000Z',products:LISTA_PAO_INICIAL});await persist();renderAll();toast('Backup restaurado');return}const arr=Array.isArray(data)?data:(data.products||data.produtos||data.items||[]);if(!Array.isArray(arr)||!arr.length)throw Error('JSON não contém uma lista de produtos');let n=0,u=0;for(const raw of arr){const p=makeProduct(raw.codigo??raw.code??raw.barcode,raw.nome??raw.name??raw.descricao,raw.embalagem??raw.medida??raw.measure,raw.marca??raw.brand);if(!validProduct(p))continue;const i=state.products.findIndex(x=>x.codigo===p.codigo);if(i>=0){state.products[i]=p;u++}else{state.products.push(p);n++}}await persist();renderAll();toast(`Importação concluída: ${n} novos, ${u} atualizados`)}catch(e){toast('Falha ao importar: '+e.message)}}
+function downloadFile(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportBackup(){downloadFile('bl-digital-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({app:'BL Digital',version:"9.3.1",exportedAt:new Date().toISOString(),state},null,2),'application/json');toast('Backup preparado')}
+async function checkStorage(){const info=$('storageInfo');const ls=testLocalStorage();let idb='não';try{if(db){await idbWrite(state);idb='sim'}}catch(e){}const persisted=await requestPersistentStorage();info.textContent=`Teste concluído — IndexedDB: ${idb}; localStorage: ${ls?'sim':'não'}; armazenamento persistente: ${persisted?'sim':'não confirmado'}. Faça backup JSON regularmente.`;toast('Verificação concluída')}
+function switchTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tab));if(tab==='guide')renderGuide();if(tab==='history')renderHistory()}
+// Calculadora: parser próprio, sem eval() e sem dependência externa.
+let calcExpression='';function tokenize(s){const t=s.match(/\d+(?:\.\d+)?|[()+\-*/%]/g)||[];if(t.join('')!==s.replace(/\s/g,''))throw Error('Expressão inválida');return t}
+function evaluateExpression(s){const t=tokenize(s);let i=0;function expr(){let v=term();while(t[i]==='+'||t[i]==='-'){const op=t[i++],r=term();v=op==='+'?v+r:v-r}return v}function term(){let v=factor();while(['*','/','%'].includes(t[i])){const op=t[i++],r=factor();if((op==='/'||op==='%')&&r===0)throw Error('Divisão por zero');v=op==='*'?v*r:op==='/'?v/r:v%r}return v}function factor(){if(t[i]==='-'){i++;return -factor()}if(t[i]==='+'){i++;return factor()}if(t[i]==='('){i++;const v=expr();if(t[i++]!==')')throw Error('Parênteses');return v}const n=Number(t[i++]);if(!Number.isFinite(n))throw Error('Número');return n}const v=expr();if(i!==t.length||!Number.isFinite(v))throw Error('Expressão inválida');return v}
+function renderCalc(){const keys=['C','⌫','%','÷','7','8','9','×','4','5','6','−','1','2','3','+','±','0',',','='];$('calcKeys').innerHTML=keys.map(k=>`<button class="${['÷','×','−','+'].includes(k)?'op':''} ${k==='='?'eq':''} ${k==='C'?'clear':''}" data-key="${k}">${k}</button>`).join('');$('calcKeys').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>calcKey(b.dataset.key)));updateCalc()}
+function updateCalc(){ $('calcExpr').textContent=calcExpression.replaceAll('*','×').replaceAll('/','÷').replaceAll('. ',',');$('calcResult').textContent=calcExpression||'0'}
+async function calcKey(k){if(k==='C')calcExpression='';else if(k==='⌫')calcExpression=calcExpression.slice(0,-1);else if(k==='±')calcExpression=calcExpression.startsWith('-')?calcExpression.slice(1):'-'+calcExpression;else if(k==='='){try{const r=evaluateExpression(calcExpression.replaceAll(',','.'));state.calcHistory.unshift({expr:calcExpression,result:String(r),at:new Date().toISOString()});state.calcHistory=state.calcHistory.slice(0,30);await persist();calcExpression=String(Number(r.toFixed(10)));renderCalcHistory()}catch(e){toast(e.message)}}else{const v=({'÷':'/','×':'*','−':'- ', ',':'.'}[k]??k);calcExpression+=v}updateCalc()}
+function renderCalcHistory(){$('calcHistory').innerHTML=state.calcHistory.length?state.calcHistory.slice(0,10).map(x=>`<div style="padding:6px 0;border-bottom:1px solid var(--line)">${escapeHTML(x.expr)} = <b>${escapeHTML(x.result)}</b></div>`).join(''):'Nenhum cálculo salvo.'}
+async function clearCalcHistory(){if(!confirm('Limpar o histórico da calculadora?'))return;state.calcHistory=[];await persist();renderCalcHistory()}
+async function processCode(code){code=cleanCode(code);if(!code)return;$('searchInput').value=code;activeSearchBrand='TODOS';switchTab('search');renderSearch();const p=state.products.find(x=>x.codigo===code);if(p)toast('Produto encontrado: '+p.nome);else toast('Código não cadastrado. Você pode cadastrar na aba Atualizar.')}
+async function startCamera(){if(!navigator.mediaDevices?.getUserMedia){toast('Câmera indisponível neste contexto. Use Ler foto.');return}if(!('BarcodeDetector'in window)){toast('Este Chrome não disponibilizou leitura contínua. Use Ler foto.');return}try{const detector=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39','itf']});stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});$('cameraVideo').srcObject=stream;$('scannerBox').classList.remove('hidden');await $('cameraVideo').play();const scan=async()=>{if(!stream)return;try{const codes=await detector.detect($('cameraVideo'));if(codes.length){stopCamera();processCode(codes[0].rawValue);return}}catch(e){}scanLoop=requestAnimationFrame(scan)};scan()}catch(e){toast('Não foi possível abrir a câmera. Tente Ler foto.')}}
+function stopCamera(){if(scanLoop)cancelAnimationFrame(scanLoop);scanLoop=0;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$('scannerBox').classList.add('hidden')}
+async function readPhoto(file){if(!file)return;const url=URL.createObjectURL(file);try{let result=null;if('BarcodeDetector'in window){try{const d=new BarcodeDetector();const img=new Image();img.src=url;await img.decode();const codes=await d.detect(img);if(codes.length)result=codes[0].rawValue}catch(e){}}if(!result&&window.ZXing){try{const reader=new ZXing.BrowserMultiFormatReader();const r=await reader.decodeFromImageUrl(url);result=r.getText()}catch(e){}}if(result)processCode(result);else toast('Não consegui ler a foto. Tente aproximar e melhorar a iluminação.')}finally{URL.revokeObjectURL(url)}}
+// Eventos
+$('openBreadList').addEventListener('click',()=>{const h=state.history.find(x=>x.id==='lista-pao');if(h){switchTab('history');openHistory(h.id)}else toast('A Lista do Pão não está no histórico')});$('searchInput').addEventListener('input',renderSearch);$('clearSearch').addEventListener('click',()=>{$('searchInput').value='';activeSearchBrand='TODOS';renderSearch()});$('saveProduct').addEventListener('click',saveProduct);$('importText').addEventListener('click',importText);$('jsonInput').addEventListener('change',e=>{const f=e.target.files[0];e.target.value='';if(f)importJSON(f)});$('exportBackup').addEventListener('click',exportBackup);$('checkStorage').addEventListener('click',checkStorage);$('saveCurrentList').addEventListener('click',saveCurrentList);$('closeHistoryViewer').addEventListener('click',closeHistory);$('confirmEdit').addEventListener('click',confirmEdit);$('cancelEdit').addEventListener('click',()=>$('editModal').classList.remove('open'));$('clearCalcHistory').addEventListener('click',clearCalcHistory);$('openCamera').addEventListener('click',startCamera);$('closeCamera').addEventListener('click',stopCamera);$('photoInput').addEventListener('change',e=>{const f=e.target.files[0];e.target.value='';readPhoto(f)});$('searchCode').addEventListener('click',()=>processCode($('manualCode').value));$('manualCode').addEventListener('keydown',e=>{if(e.key==='Enter')processCode(e.target.value)});document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));window.addEventListener('pagehide',stopCamera);
+renderCalc();initStorage().catch(e=>{console.error(e);$('storageBadge').textContent='⚠ Falha no banco local';toast('Erro ao iniciar o armazenamento: '+e.message)});
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(() => console.log('BL Digital: modo offline preparado!'))
+      .catch(error => console.error('Erro no modo offline:', error));
+  });
+}
+  </script>
+</body></html>

@@ -1,0 +1,12 @@
+{
+  "name": "BL Digital",
+  "short_name": "BL Digital",
+  "description": "Sistema de inventário e contagem de estoque.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#101827",
+  "theme_color": "#101827"
+}
